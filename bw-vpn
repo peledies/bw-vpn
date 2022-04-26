@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION='1.0.0'
+
 CONFIG_FILE="$HOME/.bw-vpn/config"
 source $CONFIG_FILE
 
@@ -114,7 +116,7 @@ configure
 while [ 1 ]
 do
 CHOICE=$(
-whiptail --title "VPN Actions" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 6 \
+whiptail --title "VPN Actions $VERSION" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 6 \
 	"1)" "Connection Status"   \
 	"2)" "Connect"  \
 	"3)" "Disconnect" \

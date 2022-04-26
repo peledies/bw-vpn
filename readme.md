@@ -15,7 +15,7 @@
 ## Installation
 
 ```
-curl https://raw.githubusercontent.com/peledies/bw-vpn/main/bw-vpn --output /usr/local/bin/bw-vpn && chmod +x /usr/local/bin/bw-vpn
+sudo curl https://raw.githubusercontent.com/peledies/bw-vpn/main/bw-vpn --output /usr/local/bin/bw-vpn && sudo chmod +x /usr/local/bin/bw-vpn
 ```
 
 ## Configuration
