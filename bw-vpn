@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION='1.1.0'
+VERSION='1.1.1'
 
 CONFIG_FILE="$HOME/.bw-vpn/config"
 source $CONFIG_FILE
@@ -33,6 +33,12 @@ setConfigValue() {
     else
         echo "export $1=$2" >> $CONFIG_FILE
     fi
+}
+
+setLastPassKeyName() {
+    LASTPASS_KEY_NAME=$(whiptail --inputbox "What is the LastPass record Name where your password is stored" --nocancel $BOX_HEIGHT $BOX_WIDTH $LASTPASS_KEY_NAME --title "LastPass Record Name" 3>&1 1>&2 2>&3)
+
+    setConfigValue "LASTPASS_KEY_NAME" $LASTPASS_KEY_NAME
 }
 
 setLastPassEnabled() {
@@ -79,6 +85,12 @@ configure() {
     if [ -z "$VPN_ENDPOINT" ]; then
         setVpnEndpoint
     fi
+
+    if $LASTPASS_ENABLED ; then
+        if [ -z "$LASTPASS_KEY_NAME" ]; then
+            setLastPassKeyName
+        fi
+    fi
 }
 
 connect() {
@@ -92,22 +104,20 @@ connect() {
             echo "LastPass authenticated"
         fi
 
-        VPN_PASSWORD=`lpass show --password bandwidth.com`
+        VPN_PASSWORD=`lpass show --password $LASTPASS_KEY_NAME`
     else
         VPN_PASSWORD=$(
             whiptail --title "VPN Actions" --passwordbox "VPN Password" $BOX_HEIGHT $BOX_WIDTH 3>&2 2>&1 1>&3
         )
     fi
 
-    # read -p 'MFA Code: ' MFA
-
-#     /opt/cisco/anyconnect/bin/vpn -s connect $VPN_ENDPOINT <<EOF
-# 0
-# $VPN_USERNAME
-# $VPN_PASSWORD
-# 2
-# y
-# EOF
+    /opt/cisco/anyconnect/bin/vpn -s connect $VPN_ENDPOINT <<EOF
+0
+$VPN_USERNAME
+$VPN_PASSWORD
+2
+y
+EOF
 }
 
 disconnect() {
@@ -154,7 +164,7 @@ configurationMenu() {
 while [ 1 ]
 do
 CHOICE=$(
-whiptail --title "VPN Actions $VERSION" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 6 \
+whiptail --title "VPN Actions $VERSION" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 5 \
 	"1)" "Connection Status"   \
 	"2)" "Connect"  \
 	"3)" "Disconnect" \
