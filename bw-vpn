@@ -27,7 +27,9 @@ setLastPassEmail() {
 
     if grep -Fq "export LASTPASS_EMAIL=" $CONFIG_FILE
     then
-        sed -i '' "s/export LASTPASS_EMAIL.*/export LASTPASS_EMAIL=$LASTPASS_EMAIL/g" $CONFIG_FILE
+        # we have to add the -i '' argument for mac
+        [ "$(uname)" == "Darwin" ] && args="-i ''" || args=""
+        `sed $args "s/export LASTPASS_EMAIL.*/export LASTPASS_EMAIL=$LASTPASS_EMAIL/g" $CONFIG_FILE`
     else
         echo "export LASTPASS_EMAIL=$LASTPASS_EMAIL" >> $CONFIG_FILE
     fi
@@ -36,9 +38,12 @@ setLastPassEmail() {
 setVpnUsername() {
     [  -z "$VPN_USERNAME" ] && USER_SLUG=$(whoami) || USER_SLUG=$VPN_USERNAME
     VPN_USERNAME=$(whiptail --inputbox "VPN Username" --nocancel $BOX_HEIGHT $BOX_WIDTH $USER_SLUG --title "VPN Username" 3>&1 1>&2 2>&3)
+
     if grep -Fq "export VPN_USERNAME=" $CONFIG_FILE
     then
-        sed -i '' "s/export VPN_USERNAME.*/export VPN_USERNAME=$VPN_USERNAME/g" $CONFIG_FILE
+         # we have to add the -i '' argument for mac
+        [ "$(uname)" == "Darwin" ] && args="-i ''" || args=""
+        `sed $args "s/export VPN_USERNAME.*/export VPN_USERNAME=$VPN_USERNAME/g" $CONFIG_FILE`
     else
         echo "export VPN_USERNAME=$VPN_USERNAME" >> $CONFIG_FILE
     fi
@@ -119,7 +124,6 @@ whiptail --title "VPN Actions" --nocancel --menu "Select an item from the menu" 
 )
 
 STATE=`/opt/cisco/anyconnect/bin/vpn state | sed -n 7p | awk '{print $NF}'`
-# STATE="Connected"
 
 case $CHOICE in
 	"1)")
