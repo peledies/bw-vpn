@@ -28,7 +28,7 @@ setLastPassEmail() {
     if grep -Fq "export LASTPASS_EMAIL=" $CONFIG_FILE
     then
         # we have to add the -i '' argument for mac
-        [ "$(uname)" == "Darwin" ] && args="-i ''" || args=""
+        [ "$(uname)" == "Darwin" ] && args="-i ''" || args="-i"
         `sed $args "s/export LASTPASS_EMAIL.*/export LASTPASS_EMAIL=$LASTPASS_EMAIL/g" $CONFIG_FILE`
     else
         echo "export LASTPASS_EMAIL=$LASTPASS_EMAIL" >> $CONFIG_FILE
@@ -42,7 +42,7 @@ setVpnUsername() {
     if grep -Fq "export VPN_USERNAME=" $CONFIG_FILE
     then
          # we have to add the -i '' argument for mac
-        [ "$(uname)" == "Darwin" ] && args="-i ''" || args=""
+        [ "$(uname)" == "Darwin" ] && args="-i ''" || args="-i"
         `sed $args "s/export VPN_USERNAME.*/export VPN_USERNAME=$VPN_USERNAME/g" $CONFIG_FILE`
     else
         echo "export VPN_USERNAME=$VPN_USERNAME" >> $CONFIG_FILE
