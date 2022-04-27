@@ -1,5 +1,7 @@
 # VPN CLI
 
+![bw-vpn screenshot](/bw-vpn.png?raw=true "bw-vpn screenshot")
+
 ## Assumptions
 
 1. `Homebrew` is installed if you are on a Mac
