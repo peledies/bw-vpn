@@ -22,9 +22,10 @@ sudo curl https://raw.githubusercontent.com/peledies/bw-vpn/main/bw-vpn --output
 
 The application will prompt the user for the following variables if they are not set in the environment:
 
-- LASTPASS_EMAIL=string
+- LASTPASS_ENABLED=boolean
 - VPN_USERNAME=string
 - VPN_ENDPOINT=string
-- LASTPASS_ENABLED=boolean
+- LASTPASS_EMAIL=string
+- LASTPASS_KEY_NAME=string
 
 These variables will be stored in the `~/.bw-vpn/config` file. Once they are set, they can be changed in the file directly or with the bw-vpn tools menu option.
