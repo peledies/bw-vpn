@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION='1.1.1'
+VERSION='1.1.2'
 
 CONFIG_FILE="$HOME/.bw-vpn/config"
 source $CONFIG_FILE
