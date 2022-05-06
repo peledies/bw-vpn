@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION='1.1.3'
+VERSION='1.1.4'
 
 CONFIG_FILE="$HOME/.bw-vpn/config"
 source $CONFIG_FILE
@@ -47,6 +47,10 @@ setConfigValue() {
     fi
     # this dynamically sets the variable name in the script scope
     printf -v "$1" '%s' "$2"
+}
+
+selfUpdate() {
+    sudo curl https://raw.githubusercontent.com/peledies/bw-vpn/main/bw-vpn --output /usr/local/bin/bw-vpn && sudo chmod +x /usr/local/bin/bw-vpn
 }
 
 setLastPassKeyName() {
@@ -181,11 +185,12 @@ configurationMenu() {
 while [ 1 ]
 do
 CHOICE=$(
-whiptail --title "VPN Actions $VERSION" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 5 \
+whiptail --title "VPN Actions $VERSION" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 6 \
 	"1)" "Connection Status"   \
 	"2)" "Connect"  \
 	"3)" "Disconnect" \
     "4)" "Configuration" \
+    "5)" "Update" \
     "x)" "Exit" 3>&2 2>&1 1>&3
 )
 
@@ -211,6 +216,9 @@ case $CHOICE in
 
     "4)")
         configurationMenu
+    ;;
+    "5)")
+        selfUpdate
     ;;
     "x)")
         exit

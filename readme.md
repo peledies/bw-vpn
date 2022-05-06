@@ -18,6 +18,10 @@
 sudo curl https://raw.githubusercontent.com/peledies/bw-vpn/main/bw-vpn --output /usr/local/bin/bw-vpn && sudo chmod +x /usr/local/bin/bw-vpn
 ```
 
+## Updating
+
+Its easy! Just select `update` from the main menu. Is going to run the install `curl` again so it will need your `sudo` password.
+
 ## Configuration
 
 The application will prompt the user for the following variables if they are not set in the environment:
