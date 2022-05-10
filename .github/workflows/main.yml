@@ -23,9 +23,16 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
+    env:
+      SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
-      - name: Send greeting
-        run: echo "Hello ${{ github.event.inputs.name }}"
+      - name: Do Production Things
+        if: env.SUPER_SECRET == 'Production Super Secret'
+        run: echo "Production! Lets Go!"
+
+      - name: Do Staging Things
+        if: env.SUPER_SECRET == 'Staging Super Secret'
+        run: echo "Staging! Lets Go!"
