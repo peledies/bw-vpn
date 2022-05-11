@@ -25,6 +25,7 @@ jobs:
       name: production
     env:
       SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
