@@ -21,17 +21,21 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: asdf
+      - name: Main Build Step
         uses: ./.github/workflows/_build.yml
         with:
           # environment_name: production
           SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
   # This workflow contains a single job called "greet"
   deploy:
-    uses: ./.github/workflows/_deploy.yml
-    with:
-      environment_name: production
-      SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Main Deploy Step
+        uses: ./.github/workflows/_deploy.yml
+        with:
+          environment_name: production
+          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
 
   # # This needs to match the label of your self hosted runner
   # runs-on: ubuntu-latest
