@@ -26,7 +26,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           # environment_name: production
-          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+          who-to-greet: ${{ secrets.SUPER_SECRET }}
   # This workflow contains a single job called "greet"
   deploy:
     runs-on: ubuntu-latest
