@@ -1,0 +1,19 @@
+name: Reusable workflow example
+
+on:
+  workflow_call:
+    # inputs:
+    #   username:
+    #     required: true
+    #     type: string
+    # secrets:
+    #   token:
+    #     required: true
+
+jobs:
+  example_job:
+    name: Run Sub Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do Build Things
+        run: echo "Doing Build Things Here"

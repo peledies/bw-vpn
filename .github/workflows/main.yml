@@ -17,26 +17,30 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  build:
+    uses: ./.github/workflows/_build.yml@main
   # This workflow contains a single job called "greet"
-  deploy:
-    # This needs to match the label of your self hosted runner
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-    env:
-      SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  # deploy:
+  #   uses: ./.github/workflows/_deploy.yml@main
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Runs a single command using the runners shell
-      - name: Do Production Things
-        if: env.SUPER_SECRET == 'Production Super Secret'
-        run: echo "::set-env name=MESSAGE::'Production! Lets Go!'"
+  # # This needs to match the label of your self hosted runner
+  # runs-on: ubuntu-latest
+  # environment:
+  #   name: production
+  # env:
+  #   SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+  #   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
-      - name: Do Staging Things
-        if: env.SUPER_SECRET == 'Staging Super Secret'
-        run: echo "::set-env name=MESSAGE::'Staging! Lets Go!'"
+  # # Steps represent a sequence of tasks that will be executed as part of the job
+  # steps:
+  #   # Runs a single command using the runners shell
+  #   - name: Do Production Things
+  #     if: env.SUPER_SECRET == 'Production Super Secret'
+  #     run: echo "::set-env name=MESSAGE::'Production! Lets Go!'"
 
-      - name: Print Message
-        run: echo $MESSAGE
+  #   - name: Do Staging Things
+  #     if: env.SUPER_SECRET == 'Staging Super Secret'
+  #     run: echo "::set-env name=MESSAGE::'Staging! Lets Go!'"
+
+  #   - name: Print Message
+  #     run: echo $MESSAGE
