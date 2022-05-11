@@ -2,19 +2,19 @@ name: Deploy
 
 on:
   workflow_call:
-    inputs:
-      environment_name:
-        required: true
-        type: string
-    # secrets:
-    #   SUPER_SECRET:
+    # inputs:
+    #   environment_name:
     #     required: true
+    #     type: string
+    secrets:
+      SUPER_SECRET:
+        required: true
 
 jobs:
   deploy_production:
     name: Deploy Production
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment_name }}
+    # environment: ${{ inputs.environment_name }}
     env:
       SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
