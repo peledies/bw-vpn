@@ -2,10 +2,10 @@ name: Reusable workflow example
 
 on:
   workflow_call:
-    # inputs:
-    #   username:
-    #     required: true
-    #     type: string
+    inputs:
+      environment:
+        required: true
+        type: string
     # secrets:
     #   token:
     #     required: true
@@ -16,4 +16,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Do Build Things
-        run: echo "Doing Build Things Here"
+        run: echo "Doing Build Things Here for environment > ${{ inputs.environment }}"

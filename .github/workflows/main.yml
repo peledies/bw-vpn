@@ -19,6 +19,8 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/_build.yml
+    with:
+      environment: custom-env
   # This workflow contains a single job called "greet"
   deploy:
     uses: ./.github/workflows/_deploy.yml
