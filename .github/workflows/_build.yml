@@ -7,7 +7,7 @@ on:
         required: true
         type: string
     # secrets:
-    #   token:
+    #   SUPER_SECRET:
     #     required: true
 
 jobs:
@@ -17,4 +17,4 @@ jobs:
     environment: ${{ inputs.environment_name }}
     steps:
       - name: Do Build Things
-        run: echo "Doing Build Things Here for environment > ${{ inputs.environment_name }}"
+        run: echo "Doing Build Things Here for environment > ${{ secrets.SUPER_SECRET }}"
