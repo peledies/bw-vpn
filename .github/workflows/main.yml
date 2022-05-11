@@ -18,10 +18,14 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    uses: ./.github/workflows/_build.yml
-    with:
-      environment_name: production
-      SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: asdf
+        uses: ./.github/workflows/_build.yml
+        with:
+          # environment_name: production
+          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
   # This workflow contains a single job called "greet"
   deploy:
     uses: ./.github/workflows/_deploy.yml
