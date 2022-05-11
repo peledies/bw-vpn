@@ -3,7 +3,7 @@ name: Reusable workflow example
 on:
   workflow_call:
     inputs:
-      environment:
+      environment_name:
         required: true
         type: string
     # secrets:
@@ -14,6 +14,7 @@ jobs:
   example_job:
     name: Run Sub Workflow
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment_name }}
     steps:
       - name: Do Build Things
-        run: echo "Doing Build Things Here for environment > ${{ inputs.environment }}"
+        run: echo "Doing Build Things Here for environment > ${{ inputs.environment_name }}"
