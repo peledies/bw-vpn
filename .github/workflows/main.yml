@@ -32,11 +32,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
+      - uses: actions/checkout@v2
       - name: Main Deploy Step
-        uses: ./.github/workflows/_deploy.yml
+        uses: ./.github/actions/deploy
         with:
-          environment_name: production
-          SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
+          # environment_name: production
+          who-to-greet: ${{ secrets.SUPER_SECRET }}
 
   # # This needs to match the label of your self hosted runner
   # runs-on: ubuntu-latest

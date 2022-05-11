@@ -1,0 +1,28 @@
+name: "Deploy"
+description: Deploy to Production"
+inputs:
+  who-to-greet: # id of input
+    description: "Who to greet"
+    required: true
+    default: "World"
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
+  steps:
+    # Runs a single command using the runners shell
+    - name: Do Production Things
+      shell: bash
+      if: env.SUPER_SECRET == 'Production Super Secret'
+      run: echo "::set-env name=MESSAGE::'Production! Lets Go!'"
+
+    - name: Do Staging Things
+      shell: bash
+      if: env.SUPER_SECRET == 'Staging Super Secret'
+      run: echo "::set-env name=MESSAGE::'Staging! Lets Go!'"
+
+    - name: Print Message
+      shell: bash
+      run: echo $MESSAGE
