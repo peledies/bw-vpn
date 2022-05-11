@@ -22,7 +22,7 @@ jobs:
     environment: production
     steps:
       - name: Main Build Step
-        uses: ./.github/workflows/actions/build
+        uses: ./.github/actions/build
         with:
           # environment_name: production
           SUPER_SECRET: ${{ secrets.SUPER_SECRET }}
