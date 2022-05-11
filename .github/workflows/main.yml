@@ -18,10 +18,10 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    uses: ./.github/workflows/_build.yml@main
+    uses: ./.github/workflows/_build.yml
   # This workflow contains a single job called "greet"
   # deploy:
-  #   uses: ./.github/workflows/_deploy.yml@main
+  #   uses: ./.github/workflows/_deploy.yml
 
   # # This needs to match the label of your self hosted runner
   # runs-on: ubuntu-latest
