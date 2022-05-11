@@ -20,10 +20,12 @@ jobs:
   build:
     uses: ./.github/workflows/_build.yml
     with:
-      environment: custom-env
+      environment: ${{ secrets.ENVIRONMENT_NAME }}
   # This workflow contains a single job called "greet"
   deploy:
     uses: ./.github/workflows/_deploy.yml
+    with:
+      environment: ${{ secrets.ENVIRONMENT_NAME }}
 
   # # This needs to match the label of your self hosted runner
   # runs-on: ubuntu-latest
