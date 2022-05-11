@@ -31,8 +31,11 @@ jobs:
       # Runs a single command using the runners shell
       - name: Do Production Things
         if: env.SUPER_SECRET == 'Production Super Secret'
-        run: echo "Production! Lets Go!"
+        run: echo "::set-env name=MESSAGE::'Production! Lets Go!'"
 
       - name: Do Staging Things
         if: env.SUPER_SECRET == 'Staging Super Secret'
-        run: echo "Staging! Lets Go!"
+        run: echo "::set-env name=MESSAGE::'Staging! Lets Go!'"
+
+      - name: Print Message
+        run: echo $MESSAGE
