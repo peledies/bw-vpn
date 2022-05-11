@@ -31,6 +31,7 @@ jobs:
           who-to-greet: ${{ secrets.SUPER_SECRET }}
   # This workflow contains a single job called "greet"
   deploy:
+    needs: [build]
     runs-on: ubuntu-latest
     environment: production
     env:
