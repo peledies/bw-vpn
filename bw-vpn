@@ -66,7 +66,8 @@ setConfigValue() {
     then
         # we have to add the -i '' argument for mac
         [ "$(uname)" == "Darwin" ] && args="-i ''" || args="-i"
-        `sed $args "s/export $1.*/export $1=$2/g" $CONFIG_FILE`
+
+        `sed $args "s!export $1.*!export $1=$2!g" $CONFIG_FILE`
     else
         echo "export $1=$2" >> $CONFIG_FILE
     fi
@@ -207,13 +208,14 @@ configure
 
 configurationMenu() {
     CONFIG_CHOICE=$(
-    whiptail --title "VPN Configuration" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 7 \
+    whiptail --title "VPN Configuration" --nocancel --menu "Select an item from the menu" $BOX_HEIGHT $BOX_WIDTH 8 \
         "1)" "Enable/Disable LastPass" \
         "2)" "Change LastPass Email" \
-        "3)" "Change VPN Endpoint" \
-        "4)" "Change VPN Username" \
-        "5)" "Set VPN Group" \
-        "6)" "Set VPN Auth method number"
+        "3)" "Change LastPass Key Name" \
+        "4)" "Change VPN Endpoint" \
+        "5)" "Change VPN Username" \
+        "6)" "Set VPN Group" \
+        "7)" "Set VPN Auth method number" \
         "x)" "Exit" 3>&2 2>&1 1>&3
     )
     case $CONFIG_CHOICE in
@@ -225,25 +227,27 @@ configurationMenu() {
             setLastPassEmail
         ;;
         "3)")
+            setLastPassKeyName
+        ;;
+        "4)")
             setVpnEndpoint
         ;;
 
-        "4)")
+        "5)")
             setVpnUsername
         ;;
 
-        "5)")
+        "6)")
             setVpnGroupNum
         ;;
 
-        "6)")
+        "7)")
             setVpnAuthNum
         ;;
 
         "x)")
         ;;
     esac
-
 }
 
 while [ 1 ]
